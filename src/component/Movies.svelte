@@ -58,14 +58,14 @@
     auth0Client = await auth.createClient()
     isAuthenticated.set(await auth0Client.isAuthenticated())
     user.set(await auth0Client.getUser())
-    if (!$isAuthenticated) await goto('/')
+    if (!$isAuthenticated)  goto('/')
   })
 
-  $: if (browser) {
-    if (document.readyState !== 'loading') {
-      if (!$isAuthenticated) goto('/')
-    } 
-  }
+//   $: if (browser) {
+//     if (document.readyState !== 'loading') {
+//       if (!$isAuthenticated) goto('/')
+//     } 
+//   }
 </script>
 
 <svelte:head>
