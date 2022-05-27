@@ -58,17 +58,13 @@
     auth0Client = await auth.createClient()
     isAuthenticated.set(await auth0Client.isAuthenticated())
     user.set(await auth0Client.getUser())
-    if (!$isAuthenticated) goto('/')
+    if (!$isAuthenticated) await goto('/')
   })
 
   $: if (browser) {
     if (document.readyState !== 'loading') {
       if (!$isAuthenticated) goto('/')
-    } else {
-      document.addEventListener('DOMContentLoaded', function () {
-        if (!$isAuthenticated) goto('/')
-      })
-    }
+    } 
   }
 </script>
 
