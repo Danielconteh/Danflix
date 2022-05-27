@@ -2,9 +2,10 @@
   import axios from 'axios'
   import { useQueries } from '@sveltestack/svelte-query'
   import { browser } from '$app/env'
-  import { banner } from '../store'
+  import { banner, isAuthenticated, user } from '../store.js'
   import Banner from './movies/Banner.svelte'
   import Home from './movies/Home.svelte'
+  import { goto } from '$app/navigation'
 
   const key = import.meta.env.VITE_API_KEY
   const base = 'https://api.themoviedb.org/3'
@@ -48,63 +49,74 @@
     const random_query = Math.floor(Math.random() * $userQueries?.length - 1)
     $banner = $userQueries[random_query]?.data?.data?.results[random_results]
   }
+
+  import auth from '../authService.js'
+  import { onMount } from 'svelte'
+
+  let auth0Client
+  onMount(async () => {
+    auth0Client = await auth.createClient()
+    isAuthenticated.set(await auth0Client.isAuthenticated())
+    user.set(await auth0Client.getUser())
+    if (!$isAuthenticated) goto('/')
+  })
+
+  $: if (browser) {
+    if (document.readyState !== 'loading') {
+      if (!$isAuthenticated) goto('/')
+    } else {
+      document.addEventListener('DOMContentLoaded', function () {
+        if (!$isAuthenticated) goto('/')
+      })
+    }
+  }
 </script>
 
 <svelte:head>
   <title>Home</title>
 </svelte:head>
 
-<Banner {base_data} />
-
-<!-- {#if error}
-  <div class="error">
-    <p>something went wrong!</p>
-
-    <a href="/">please try again</a>
-  </div>
-{:else} -->
-<!-- MOVIES COMPONENT -->
-
-<!-- svelte-ignore component-name-lowercase -->
-<Home
-  title="netflixOriginal"
-  netflixOriginal={$userQueries[0]?.data?.data?.results}
-  {banner_img_backdrop}
-  isLargeRow
-/>
-<Home
-  title="trending now"
-  netflixOriginal={$userQueries[1]?.data?.data?.results}
-  {banner_img_backdrop}
-/>
-<Home
-  title="top rated"
-  netflixOriginal={$userQueries[2]?.data?.data?.results}
-  {banner_img_backdrop}
-/>
-<Home
-  title="action movies"
-  netflixOriginal={$userQueries[3]?.data?.data?.results}
-  {banner_img_backdrop}
-/>
-<Home
-  title="commedy movies"
-  netflixOriginal={$userQueries[4]?.data?.data?.results}
-  {banner_img_backdrop}
-/>
-<Home
-  title="horror movies"
-  netflixOriginal={$userQueries[5]?.data?.data?.results}
-  {banner_img_backdrop}
-/>
-<Home
-  title="romance movies"
-  netflixOriginal={$userQueries[6]?.data?.data?.results}
-  {banner_img_backdrop}
-/>
-<Home
-  title="documentaries movies"
-  netflixOriginal={$userQueries[7]?.data?.data?.results}
-  {banner_img_backdrop}
-/>
-<!-- {/if} -->
+{#if $isAuthenticated}
+  <Banner {base_data} />
+  <Home
+    title="netflixOriginal"
+    netflixOriginal={$userQueries[0]?.data?.data?.results}
+    {banner_img_backdrop}
+    isLargeRow
+  />
+  <Home
+    title="trending now"
+    netflixOriginal={$userQueries[1]?.data?.data?.results}
+    {banner_img_backdrop}
+  />
+  <Home
+    title="top rated"
+    netflixOriginal={$userQueries[2]?.data?.data?.results}
+    {banner_img_backdrop}
+  />
+  <Home
+    title="action movies"
+    netflixOriginal={$userQueries[3]?.data?.data?.results}
+    {banner_img_backdrop}
+  />
+  <Home
+    title="commedy movies"
+    netflixOriginal={$userQueries[4]?.data?.data?.results}
+    {banner_img_backdrop}
+  />
+  <Home
+    title="horror movies"
+    netflixOriginal={$userQueries[5]?.data?.data?.results}
+    {banner_img_backdrop}
+  />
+  <Home
+    title="romance movies"
+    netflixOriginal={$userQueries[6]?.data?.data?.results}
+    {banner_img_backdrop}
+  />
+  <Home
+    title="documentaries movies"
+    netflixOriginal={$userQueries[7]?.data?.data?.results}
+    {banner_img_backdrop}
+  />
+{/if}

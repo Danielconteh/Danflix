@@ -10,14 +10,16 @@
 </script>
 
 <script>
-  // export let message
+  import ErrorScreen from '../component/errors/ErrorScreen.svelte'
+  import NotFoundScreen from '../component/errors/NotFoundScreen.svelte'
+  export let message
   export let status
 </script>
 
 <div>something went wrong!</div>
 {#if status == 404}
   <!-- Used '==' instead of '===' to match string/number status code (just to be sure) -->
-  <!-- <NotFoundScreen /> -->
+  <ErrorScreen {message} />
 {:else}
-  <!-- <ErrorScreen {message} {status} /> -->
+  <NotFoundScreen />
 {/if}

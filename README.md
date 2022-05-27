@@ -1,5 +1,3 @@
-# create-svelte
+## DANFLIX-MOVIES
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
-
-## Creating a project
+Explore thousand of movies by clicking the link [`recipe center`](https://danflix-movie.vercel.app/).

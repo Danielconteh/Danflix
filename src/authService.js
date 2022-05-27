@@ -18,7 +18,7 @@ async function loginWithPopup(client, options) {
   try {
     await client?.loginWithPopup(options)
 
-    user?.set(await client.getUser())
+    user?.set(await client?.getUser())
     isAuthenticated?.set(true)
   } catch (e) {
     // eslint-disable-next-line

@@ -24,7 +24,8 @@
 
   async function login() {
     await auth.loginWithPopup(auth0Client)
-    return goto('/movies')
+    // return goto('/movies')
+    return window && location.assign('/movies')
   }
   async function logout() {
     await auth.logout(auth0Client)
@@ -105,7 +106,7 @@
         rgba(0, 0, 0, 0.5) 75%,
         rgba(0, 0, 0, 0.5) 100%
       ),
-      url('./Netflix-Background.jpg');
+      url('/Netflix-Background.jpg');
     background-position: center center;
     background-size: cover;
     height: 100%;
@@ -132,7 +133,7 @@
     margin-right: 5rem;
     cursor: pointer;
     letter-spacing: 0.19rem;
-    font-family: Oswald;
+    font-family: 'Oswald', sans-serif;
     text-transform: uppercase;
   }
   .svg-icon {
