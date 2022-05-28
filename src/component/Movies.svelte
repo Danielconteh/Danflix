@@ -28,7 +28,7 @@
     urls.map((el) => {
       return {
         queryKey: [el],
-        queryFn: async () => await  axios.get(el,{cache: "force-cache"}),
+        queryFn: async () => await  fetch(el,{cache: "force-cache"}),
       }
     }),
     {
