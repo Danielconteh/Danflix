@@ -29,7 +29,6 @@
           headers: {
             'api-key': `${import.meta.env.VITE_API_KEY}`
           },
-          mode: 'cors',    		    // no-cors, *cors, same-origin
           credentials: 'same-origin',      // include, *same-origin, omit
           cf: {
 					    // Always cache this fetch regardless of content type
