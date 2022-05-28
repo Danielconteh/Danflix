@@ -29,7 +29,8 @@
           headers: {
             'api-key': `${import.meta.env.VITE_API_KEY}`
           },
-          credentials: 'same-origin',      // include, *same-origin, omit
+	  mode: 'no-cors', // no-cors, *cors, same-origin
+          credentials: 'omit',      // include, *same-origin, omit
           cf: {
 					    // Always cache this fetch regardless of content type
 					    // for a max of 60 seconds before revalidating the resource
