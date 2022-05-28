@@ -27,13 +27,13 @@
         queryKey: [el],
         queryFn: async () => await fetch(el,{
           headers: {
-            'api-key': `${import.meta.env.VITE_API_KEY`
+            'api-key': `${import.meta.env.VITE_API_KEY}`
           },
-          mode: 'cors', // no-cors, *cors, same-origin
-          credentials: 'same-origin', // include, *same-origin, omit
+          mode: 'cors',    		    // no-cors, *cors, same-origin
+          credentials: 'same-origin',      // include, *same-origin, omit
           cf: {
-            // Always cache this fetch regardless of content type
-            // for a max of 60 seconds before revalidating the resource
+					    // Always cache this fetch regardless of content type
+					    // for a max of 60 seconds before revalidating the resource
             cacheTtl: 4 *60 * 60* 1000,
             cacheEverything: true,
 	},
