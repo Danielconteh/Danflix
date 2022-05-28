@@ -1,6 +1,6 @@
 <script>
   import axios from 'axios'
-     import { useQueries } from '@sveltestack/svelte-query'
+  import { useQueries } from '@sveltestack/svelte-query'
   import { browser } from '$app/env'
   import { banner, isAuthenticated, user } from '../store.js'
   import Banner from './movies/Banner.svelte'
@@ -27,7 +27,19 @@
     urls.map((el) => {
       return {
         queryKey: [el],
-        queryFn: async () => await  axios(el,{cache: "force-cache"}),
+        queryFn: async () => await fetch(el,{
+          headers: {
+            'api-key': `${import.meta.env.VITE_API_KEY`,
+          },
+          mode: 'cors', // no-cors, *cors, same-origin
+          credentials: 'same-origin', // include, *same-origin, omit
+          cf: {
+            // Always cache this fetch regardless of content type
+            // for a max of 60 seconds before revalidating the resource
+            cacheTtl: 4 *60 * 60* 1000,
+            cacheEverything: true,
+		},
+	}),
       }
     }),
     {
