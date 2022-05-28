@@ -1,7 +1,7 @@
 <script>
   import axios from 'axios'
   import { setupCache } from 'axios-cache-adapter'
-  import { useQueries } from '@sveltestack/svelte-query'
+  
   import { browser } from '$app/env'
   import { banner, isAuthenticated, user } from '../store.js'
   import Banner from './movies/Banner.svelte'
@@ -9,15 +9,6 @@
   import { goto } from '$app/navigation'
   
 
-      // Create `axios-cache-adapter` instance
-    const cache = setupCache({
-      maxAge: 12 * 60 * 60 * 1000 // half day
-    })
-
-    // Create `axios` instance passing the newly created `cache.adapter`
-    const api = axios.create({
-      adapter: cache.adapter
-    })
 
 
   const key = import.meta.env.VITE_API_KEY
@@ -37,11 +28,7 @@
     urls.map((el) => {
       return {
         queryKey: [el],
-        queryFn: async () => await api({
-        url: el,
-        method: 'get'
-    })
-//         axios.get(el),
+        queryFn: async () => await  axios.get(el,{cache: "force-cache"}),
       }
     }),
     {
