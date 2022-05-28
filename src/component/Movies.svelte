@@ -1,7 +1,6 @@
 <script>
   import axios from 'axios'
-  import { setupCache } from 'axios-cache-adapter'
-  
+     import { useQueries } from '@sveltestack/svelte-query'
   import { browser } from '$app/env'
   import { banner, isAuthenticated, user } from '../store.js'
   import Banner from './movies/Banner.svelte'
@@ -28,7 +27,7 @@
     urls.map((el) => {
       return {
         queryKey: [el],
-        queryFn: async () => await  fetch(el,{cache: "force-cache"}),
+        queryFn: async () => await  axios(el,{cache: "force-cache"}),
       }
     }),
     {
