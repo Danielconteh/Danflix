@@ -27,16 +27,11 @@
         queryKey: [el],
         queryFn: async () => await axios(el,{
           headers: {
-            'api-key': `${import.meta.env.VITE_API_KEY}`
+            'api-key': `${import.meta.env.VITE_API_KEY}`,
+	     'cache-control': 'public, max-age=3600'
           },
-	  mode: 'no-cors', // no-cors, *cors, same-origin
-          credentials: 'omit',      // include, *same-origin, omit
-          cf: {
-					    // Always cache this fetch regardless of content type
-					    // for a max of 60 seconds before revalidating the resource
-            cacheTtl: 4 *60 * 60* 1000,
-            cacheEverything: true,
-	},
+	  cache: "no-cache"
+	
 	}),
       }
     }),
