@@ -25,7 +25,7 @@
     urls.map((el) => {
       return {
         queryKey: [el],
-        queryFn: async () => await fetch(el,{
+        queryFn: async () => await axios(el,{
           headers: {
             'api-key': `${import.meta.env.VITE_API_KEY}`
           },
