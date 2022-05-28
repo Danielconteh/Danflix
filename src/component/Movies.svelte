@@ -25,14 +25,7 @@
     urls.map((el) => {
       return {
         queryKey: [el],
-        queryFn: async () => await fetch(el,{
-          headers: {
-            'api-key': `${import.meta.env.VITE_API_KEY}`,
-	     'cache-control': 'public, max-age=3600'
-          },
-	  cache: "no-cache"
-	
-	}),
+        queryFn: async () => await axios(el,{cache: "force-cache"}),
       }
     }),
     {
