@@ -119,13 +119,9 @@
 
   .img_span:hover {
     transform: scale(1.05);
-    outline: 1px solid gray;
-    outline-offset: 3px;
   }
   .active {
     transform: scale(1.05);
-    outline: 1px solid gray;
-    outline-offset: 3px;
   }
 
   .row__posterLarge {
