@@ -6,6 +6,7 @@
   import Banner from './movies/Banner.svelte'
   import Home from './movies/Home.svelte'
   import { goto } from '$app/navigation'
+  
 
   const key = import.meta.env.VITE_API_KEY
   const base = 'https://api.themoviedb.org/3'
@@ -24,7 +25,7 @@
     urls.map((el) => {
       return {
         queryKey: [el],
-        queryFn: () => axios.get(el),
+        queryFn:  () =>  axios(el,{cache: "force-cache"}),
       }
     }),
     {
@@ -60,9 +61,10 @@
     auth0Client = await auth.createClient()
     isAuthenticated.set(await auth0Client.isAuthenticated())
     user.set(await auth0Client.getUser())
-    if (!$isAuthenticated) goto('/')
+    if (!$isAuthenticated)  goto('/')
   })
 
+<<<<<<< HEAD
   $: if (browser) {
     // if (document.readyState !== 'loading') {
     //   if (!$isAuthenticated) goto('/')
@@ -73,6 +75,13 @@
     })
     // }
   }
+=======
+//   $: if (browser) {
+//     if (document.readyState !== 'loading') {
+//       if (!$isAuthenticated) goto('/')
+//     } 
+//   }
+>>>>>>> b88207884b85d3a4a56e4acbcd630b5ec7c3d32b
 </script>
 
 <svelte:head>
