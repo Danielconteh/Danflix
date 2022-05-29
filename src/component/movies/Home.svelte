@@ -75,6 +75,7 @@
           on:mouseenter={{ $: banner_img_backdrop(browser && movie) }}
         >
           <Image
+            threshold={0.5}
             src={`${baseUrl}${
               isLargeRow ? movie?.poster_path : movie?.backdrop_path
             }`}
