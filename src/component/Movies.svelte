@@ -62,23 +62,6 @@
     user.set(await auth0Client.getUser())
     if (!$isAuthenticated) goto('/')
   })
-
-  // <<<<<<< HEAD
-  //   $: if (browser) {
-  //     // if (document.readyState !== 'loading') {
-  //     //   if (!$isAuthenticated) goto('/')
-  //     // }
-  //     // else {
-  //     document.addEventListener('DOMContentLoaded', function () {
-  //       if (!$isAuthenticated) goto('/')
-  //     })
-  //     // }
-  //   }
-  //   $: if (browser) {
-  //     if (document.readyState !== 'loading') {
-  //       if (!$isAuthenticated) goto('/')
-  //     }
-  //   }
 </script>
 
 <svelte:head>

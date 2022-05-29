@@ -62,6 +62,7 @@
     <div style="display: flex;">
       {#each movie as movie (movie.id)}
         <span
+          class="img_span"
           style={`display: inline-block; margin-right: 1.5rem; overflow: scroll hidden;
     scrollbar-width: none; width:${
       isLargeRow ? `150px` : `175px`
@@ -108,14 +109,15 @@
     display: none;
   }
 
-  /* .row__poster {
-    object-fit: contain;
-    max-height: 12rem;
-    margin-right: 1.5rem;
-    transition: transform 500ms;
-    cursor: pointer;
-  } */
-  .row__poster:hover {
+  .img_span {
+    transition: all 250ms ease-in;
+  }
+
+  .img_span::-webkit-scrollbar {
+    display: none;
+  }
+
+  .img_span:hover {
     transform: scale(1.05);
     outline: 1px solid gray;
     outline-offset: 3px;
