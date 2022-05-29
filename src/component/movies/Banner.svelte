@@ -74,7 +74,7 @@ url("https://image.tmdb.org/t/p/original/${
     display: flex;
     align-items: center;
     position: relative;
-    overflow: hidden;
+    overflow: hidden !important;
     background-position: center;
     background-size: cover;
     font-family: 'Roboto', sans-serif;

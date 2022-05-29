@@ -7,7 +7,7 @@
   import StoryCard5 from './storyCard5.svelte'
 
   import DividerLine from './DividerLine.svelte'
-  import { isAuthenticated, user } from '../store.js'
+  import { isAuthenticated, user, userInfo } from '../store.js'
 
   import { onMount } from 'svelte'
 
@@ -20,15 +20,18 @@
     auth0Client = await auth.createClient()
     isAuthenticated.set(await auth0Client.isAuthenticated())
     user.set(await auth0Client.getUser())
+    // $userInfo = await auth0Client.getUser()
   })
 
   async function login() {
     await auth.loginWithPopup(auth0Client)
+    // $userInfo = await auth0Client.getUser()
     // return goto('/movies')
     return window && location.assign('/movies')
   }
   async function logout() {
     await auth.logout(auth0Client)
+    // $userInfo = null
     return goto('/')
   }
 </script>

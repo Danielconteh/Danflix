@@ -1,5 +1,6 @@
 <script>
   // @ts-nocheck
+  import Image from 'svelte-image'
   import { browser } from '$app/env'
 
   // @ts-ignore
@@ -35,6 +36,7 @@
   }
 
   let targetFun = (arg) => {
+    // console.log(arg?.parentElement.parentElement.parentElement)
     Array.from(arg?.parentElement?.children).forEach((el) =>
       el.classList.remove('active')
     )
@@ -50,25 +52,36 @@
     src="https://unpkg.com/movie-trailer"></script>
 </svelte:head>
 
-<div class="row">
+<div
+  class="row"
+  style={isLargeRow ? ' margin-bottom: 3rem;' : ' margin-bottom: -7rem;'}
+>
   <h2 class="row__title">{title.toUpperCase()}</h2>
 
-  <div class="row__posters">
-    {#each movie as movie (movie.id)}
-      <img
-        on:mouseenter={{ $: banner_img_backdrop(browser && movie) }}
-        on:click={(e) => {
-          targetFun(e?.target)
-          video_name(movie?.name || movie?.title || movie?.name || '')
-        }}
-        class={`row__poster ${isLargeRow && 'row__posterLarge'}`}
-        src={`${baseUrl}${
-          isLargeRow ? movie?.poster_path : movie?.backdrop_path
-        }`}
-        alt={movie?.name || movie?.original_title || ''}
-        srcset=""
-      />
-    {/each}
+  <div class={`row__posters`}>
+    <div style="display: flex;">
+      {#each movie as movie (movie.id)}
+        <span
+          style={`display: inline-block; margin-right: 1.5rem; overflow: scroll hidden;
+    scrollbar-width: none; width:${
+      isLargeRow ? `150px` : `175px`
+    };   cursor: pointer;`}
+          on:click={(e) => {
+            console.log(e.target)
+            targetFun(e?.target)
+            video_name(movie?.name || movie?.title || movie?.name || '')
+          }}
+          on:mouseenter={{ $: banner_img_backdrop(browser && movie) }}
+        >
+          <Image
+            src={`${baseUrl}${
+              isLargeRow ? movie?.poster_path : movie?.backdrop_path
+            }`}
+            alt={movie?.name || movie?.original_title || ''}
+          />
+        </span>
+      {/each}
+    </div>
   </div>
 
   {#if trailer_url}
@@ -86,22 +99,22 @@
 
   .row__posters {
     display: flex;
-    overflow: scroll hidden;
+    overflow: scroll;
     scrollbar-width: none;
-    padding: 2rem 0.5rem;
+    padding: 1rem 0.5rem;
   }
 
   .row__posters::-webkit-scrollbar {
     display: none;
   }
 
-  .row__poster {
+  /* .row__poster {
     object-fit: contain;
     max-height: 12rem;
     margin-right: 1.5rem;
     transition: transform 500ms;
     cursor: pointer;
-  }
+  } */
   .row__poster:hover {
     transform: scale(1.05);
     outline: 1px solid gray;

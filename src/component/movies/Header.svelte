@@ -41,7 +41,7 @@
     align-items: center;
     padding: 2rem;
     transition: ease-in all 0.5s;
-    overflow: hidden;
+    overflow: hidden !important;
     z-index: 1;
   }
   .nav_background {

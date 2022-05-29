@@ -28,7 +28,9 @@
       }
     }),
     {
-      retry: 10,
+      retry: 5,
+      cacheTime: 60 * 60 * 24,
+      refetchOnWindowFocus: true,
     }
   )
 
@@ -62,13 +64,14 @@
   })
 
   $: if (browser) {
-    if (document.readyState !== 'loading') {
+    // if (document.readyState !== 'loading') {
+    //   if (!$isAuthenticated) goto('/')
+    // }
+    // else {
+    document.addEventListener('DOMContentLoaded', function () {
       if (!$isAuthenticated) goto('/')
-    } else {
-      document.addEventListener('DOMContentLoaded', function () {
-        if (!$isAuthenticated) goto('/')
-      })
-    }
+    })
+    // }
   }
 </script>
 
