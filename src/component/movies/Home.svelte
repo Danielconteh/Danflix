@@ -54,7 +54,7 @@
 
 <div
   class="row"
-  style={isLargeRow ? ' margin-bottom: 3rem;' : ' margin-bottom: -7rem;'}
+  style={isLargeRow ? ' margin-bottom: 0rem;' : ' margin-bottom: 1rem;'}
 >
   <h2 class="row__title">{title.toUpperCase()}</h2>
 
@@ -66,7 +66,7 @@
           style={`display: inline-block; margin-right: 1.5rem; overflow: scroll hidden;
     scrollbar-width: none; width:${
       isLargeRow ? `150px` : `175px`
-    };   cursor: pointer;`}
+    };   cursor: pointer; height:${isLargeRow ? `` : `98.44px`}`}
           on:click={(e) => {
             console.log(e.target)
             targetFun(e?.target)

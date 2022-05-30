@@ -109,10 +109,11 @@ url("https://image.tmdb.org/t/p/original/${
   }
   @media screen and (max-width: 50em) {
     .banner__title {
-      font-size: 2rem;
-      padding-bottom: 0.3rem;
+      font-size: 1.85rem;
+      padding: 0.5rem 0.3rem;
       letter-spacing: 0.1rem;
       margin-top: 1rem;
+      width: 90%;
     }
   }
 

@@ -114,8 +114,8 @@
     background-size: cover;
     height: 100%;
     width: 100vw;
-    box-shadow: inset 120px 100px 250px #000000,
-      inset -120px -100px 250px #000000;
+    /* box-shadow: inset 120px 100px 250px #000000,
+      inset -120px -100px 250px #000000; */
   }
   .banner_hearder {
     display: flex;

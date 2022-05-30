@@ -49,7 +49,7 @@
   }
   .nav_log,
   img {
-    width: 8rem;
+    /* width: 5rem; */
     object-fit: contain;
     position: fixed;
     cursor: pointer;
@@ -61,14 +61,22 @@
     align-items: center;
   }
   img {
-    width: 4rem;
+    width: 3rem;
     font-size: 1.7rem;
     right: 0;
     display: block;
     padding: 1rem 1.4rem;
-    border-radius: 3px;
+    border-radius: 7px;
     margin-right: 3rem;
     text-transform: capitalize;
     letter-spacing: 0.1rem;
+  }
+  @media screen and (max-width: 50em) {
+    img {
+      margin-right: 1rem;
+    }
+    .nav_log {
+      margin-left: 1rem;
+    }
   }
 </style>
