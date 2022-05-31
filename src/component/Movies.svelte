@@ -6,6 +6,7 @@
   import Banner from './movies/Banner.svelte'
   import Home from './movies/Home.svelte'
   import { goto } from '$app/navigation'
+  import Icon from '@iconify/svelte'
 
   const key = import.meta.env.VITE_API_KEY
   const base = 'https://api.themoviedb.org/3'
@@ -111,4 +112,32 @@
     netflixOriginal={$userQueries[7]?.data?.data?.results}
     {banner_img_backdrop}
   />
+{:else}
+  <div class="spiiner_container">
+    <div class="spiner">
+      <Icon icon="ei:spinner" width="70" height="70" />
+    </div>
+  </div>
 {/if}
+
+<style>
+  .spiiner_container {
+    overflow: hidden !important;
+  }
+  .spiner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: spinner 700ms infinite cubic-bezier(0.445, 0.05, 0.55, 0.95);
+    height: 100vh;
+  }
+
+  @keyframes spinner {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+</style>

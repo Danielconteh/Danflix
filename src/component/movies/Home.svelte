@@ -18,7 +18,7 @@
   const baseUrl = 'https://image.tmdb.org/t/p/original/'
 
   const video_name = async (movie_name) => {
-    console.log(movie_name)
+    close_player()
     try {
       let addr = new URL(await movieTrailer(movie_name))
       trailer_url = addr.href.split('=')[1]
@@ -94,9 +94,11 @@
 <!-- CSS STYLING........... font-family: 'Oswald', sans-serif;-->
 <style>
   .row {
-    margin-left: 1.5rem;
     font-family: 'Oswald', sans-serif;
     letter-spacing: 0.3rem;
+  }
+  .row__title {
+    margin-left: 1.5rem;
   }
 
   .row__posters {

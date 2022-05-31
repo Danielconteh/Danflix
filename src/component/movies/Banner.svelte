@@ -35,6 +35,7 @@ url("https://image.tmdb.org/t/p/original/${
       '/fOy2Jurz9k6RnJnMUMRDAgBwru2.jpg'}');
     background-size:cover;
     background-position:center;
+     background-repeat: no-repeat;
   "
   >
     <Header />
@@ -77,6 +78,7 @@ url("https://image.tmdb.org/t/p/original/${
     overflow: hidden !important;
     background-position: center;
     background-size: cover;
+    background-repeat: no-repeat;
     font-family: 'Roboto', sans-serif;
   }
 

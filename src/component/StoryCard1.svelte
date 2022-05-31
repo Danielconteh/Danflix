@@ -59,6 +59,7 @@
 
   .storyCard1-img-Container {
     position: relative;
+    order: 1;
   }
 
   .storyCard1__card-text {
@@ -84,6 +85,9 @@
   }
 
   @media screen and (max-width: 50em) {
+    .storyCard1__card-text {
+      order: 2;
+    }
     /*800px*/
     .storyCard1__card-text h1 {
       font-size: 2.5rem;
