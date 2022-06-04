@@ -12,7 +12,6 @@
   import { page } from '$app/stores'
 
   NProgress.configure({
-    // Full list: https://github.com/rstacruz/nprogress#configuration
     minimum: 0.16,
     showSpinner: false,
   })
@@ -31,7 +30,7 @@
       apiKey: 'AIzaSyDTR5SBMKmDAzLcI_6SjkBAbCoSkF2zNGA',
       authDomain: 'danflix-4b096.firebaseapp.com',
       projectId: 'danflix-4b096',
-      storageBucket: 'danflix-4b096.appspot.com',
+      // storageBucket: 'danflix-4b096.appspot.com',
       messagingSenderId: '139233559084',
       appId: '1:139233559084:web:3d459a5c69409c08f8c789',
     }

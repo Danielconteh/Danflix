@@ -68,7 +68,7 @@
       </div>
 
       <span
-        on:click={!$authStore?.isLoggedIn ? loginWithGoogle : goto('/movies')}
+        on:click={!$authStore?.isLoggedIn ? goto('/login') : goto('/movies')}
       >
         {#if !$authStore?.isLoggedIn}
           <span> sign in to continue</span>
