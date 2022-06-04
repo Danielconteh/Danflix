@@ -7,32 +7,27 @@
   import StoryCard5 from './storyCard5.svelte'
 
   import DividerLine from './DividerLine.svelte'
-  import { isAuthenticated, user, userInfo } from '../store.js'
+  import authStore from '../store'
 
-  import { onMount } from 'svelte'
-
-  import auth from '../authService.js'
   import { goto } from '$app/navigation'
+  import firebase from 'firebase/app'
 
-  let auth0Client
-
-  onMount(async () => {
-    auth0Client = await auth.createClient()
-    isAuthenticated.set(await auth0Client.isAuthenticated())
-    user.set(await auth0Client.getUser())
-    // $userInfo = await auth0Client.getUser()
-  })
-
-  async function login() {
-    await auth.loginWithPopup(auth0Client)
-    // $userInfo = await auth0Client.getUser()
-    // return goto('/movies')
-    return window && location.assign('/movies')
+  async function loginWithGoogle() {
+    try {
+      const provider = new firebase.auth.GoogleAuthProvider()
+      await firebase.auth().signInWithPopup(provider)
+      return goto('/movies')
+    } catch (e) {
+      console.log(e)
+    }
   }
+
   async function logout() {
-    await auth.logout(auth0Client)
-    // $userInfo = null
-    return goto('/')
+    try {
+      await firebase.auth().signOut()
+    } catch (e) {
+      alert(e?.message)
+    }
   }
 </script>
 
@@ -52,8 +47,14 @@
         ></svg
       >
 
-      {#if !$isAuthenticated}
-        <span on:click={login}>sign in</span>
+      {#if !$authStore?.isLoggedIn}
+        <!-- <a href="/login">sign in</a> -->
+        <span
+          on:click={() => {
+            console.log('login')
+            goto('/login')
+          }}>sign in</span
+        >
       {:else}
         <span on:click={logout}>logout</span>
       {/if}
@@ -66,8 +67,10 @@
         <p>enjoy the best hollywood, nollywood, bollywood and much more.</p>
       </div>
 
-      <span on:click={!$isAuthenticated ? login : goto('/movies')}>
-        {#if !$isAuthenticated}
+      <span
+        on:click={!$authStore?.isLoggedIn ? loginWithGoogle : goto('/movies')}
+      >
+        {#if !$authStore?.isLoggedIn}
           <span> sign in to continue</span>
         {:else}
           <span>continue watch</span>

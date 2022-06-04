@@ -2,10 +2,9 @@
   import axios from 'axios'
   import { useQueries } from '@sveltestack/svelte-query'
   import { browser } from '$app/env'
-  import { banner, isAuthenticated, user } from '../store.js'
+  import authStore, { banner } from '../store.js'
   import Banner from './movies/Banner.svelte'
   import Home from './movies/Home.svelte'
-  import { goto } from '$app/navigation'
   import Icon from '@iconify/svelte'
 
   const key = import.meta.env.VITE_API_KEY
@@ -25,17 +24,18 @@
     urls.map((el) => {
       return {
         queryKey: [el],
-        queryFn: () => axios(el, { cache: 'force-cache' }),
+        queryFn: async () => await axios(el, { cache: 'force-cache' }),
       }
     }),
     {
-      retry: 5,
+      retry: 7,
       cacheTime: 60 * 60 * 24,
       refetchOnWindowFocus: true,
     }
   )
 
-  export let base_data =
+  // export
+  let base_data =
     $userQueries[0]?.data?.data?.results[
       Math.floor(
         Math.random() * $userQueries[0]?.data?.data?.results.length - 1
@@ -45,31 +45,20 @@
   const banner_img_backdrop = (banner_data) =>
     ($banner = (browser && banner_data) || base_data)
 
-  $: if (!$banner) {
+  $: if (!!!$banner) {
     const random_results = Math.floor(
       Math.random() * $userQueries[0]?.data?.data?.results.length - 1
     )
     const random_query = Math.floor(Math.random() * $userQueries?.length - 1)
     $banner = $userQueries[random_query]?.data?.data?.results[random_results]
   }
-
-  import auth from '../authService.js'
-  import { onMount } from 'svelte'
-
-  let auth0Client
-  onMount(async () => {
-    auth0Client = await auth.createClient()
-    isAuthenticated.set(await auth0Client.isAuthenticated())
-    user.set(await auth0Client.getUser())
-    if (!$isAuthenticated) goto('/')
-  })
 </script>
 
 <svelte:head>
   <title>Home</title>
 </svelte:head>
 
-{#if $isAuthenticated}
+{#if $authStore?.isLoggedIn}
   <Banner {base_data} />
   <Home
     title="netflixOriginal"
