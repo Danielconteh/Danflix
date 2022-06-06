@@ -34,29 +34,20 @@
       storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
       messagingSenderId: import.meta.env.VITE_MESSAGE_ID,
       appId: import.meta.env.VITE_APP_ID,
-
-      //      apiKey: import.meta.env.VITE_API_KEY_FIREBASE,
-      // authDomain: import.meta.env.VITE_AUTH_DOMAIN,
-      // projectId: import.meta.env.VITE_PROJECT_ID,
-      // storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
-      // messagingSenderId: import.meta.env.VITE_MESSAGE_ID,
-      // appId: '1:139233559084:web:3d459a5c69409c08f8c789',
     }
 
-    if (firebase) {
-      firebase.initializeApp(firebaseConfig)
+    firebase.initializeApp(firebaseConfig)
 
-      firebase.auth().onAuthStateChanged((user) => {
-        authStore.set({
-          isLoggedIn: user !== null,
-          user,
-          firebaseControlled: true,
-        })
-        if ($page?.url?.pathname.split('/')[1] === 'movies') {
-          if (!user) return goto('/')
-        }
+    firebase.auth().onAuthStateChanged((user) => {
+      authStore.set({
+        isLoggedIn: user !== null,
+        user,
+        firebaseControlled: true,
       })
-    }
+      if ($page?.url?.pathname.split('/')[1] === 'movies') {
+        if (!user) return goto('/')
+      }
+    })
   })
 </script>
 
