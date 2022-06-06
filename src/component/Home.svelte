@@ -12,12 +12,10 @@
   import { goto } from '$app/navigation'
 
   async function logout() {
-    if (firebase) {
-      try {
-        await firebase.auth().signOut()
-      } catch (e) {
-        alert(e?.message)
-      }
+    try {
+      await firebase.auth().signOut()
+    } catch (e) {
+      alert(e?.message)
     }
   }
 </script>

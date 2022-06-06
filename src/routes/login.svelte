@@ -1,12 +1,13 @@
 <script>
   import { browser } from '$app/env'
+  import { goto } from '$app/navigation'
   import Icon from '@iconify/svelte'
 
   async function loginWithGoogle() {
     try {
       const provider = new firebase.auth.GoogleAuthProvider()
       await firebase.auth().signInWithPopup(provider)
-      browser && window.location.assign('/movies')
+      browser && goto('/movies')
     } catch (e) {
       alert(e?.message)
     }
@@ -16,7 +17,7 @@
     try {
       let provider = new firebase.auth.GithubAuthProvider()
       await firebase.auth().signInWithPopup(provider)
-      browser && window.location.assign('/movies')
+      browser && goto('/movies')
     } catch (e) {
       alert(e?.message)
     }
