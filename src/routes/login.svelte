@@ -3,27 +3,22 @@
   import Icon from '@iconify/svelte'
 
   async function loginWithGoogle() {
-    if (firebase) {
-      try {
-        console.log('first')
-        const provider = new firebase.auth.GoogleAuthProvider()
-        await firebase.auth().signInWithPopup(provider)
-        browser && window.location.assign('/movies')
-      } catch (e) {
-        alert(e?.message)
-      }
+    try {
+      const provider = new firebase.auth.GoogleAuthProvider()
+      await firebase.auth().signInWithPopup(provider)
+      browser && window.location.assign('/movies')
+    } catch (e) {
+      alert(e?.message)
     }
   }
 
   async function loginWithGithub() {
-    if (firebase) {
-      try {
-        let provider = new firebase.auth.GithubAuthProvider()
-        await firebase.auth().signInWithPopup(provider)
-        browser && window.location.assign('/movies')
-      } catch (e) {
-        alert(e?.message)
-      }
+    try {
+      let provider = new firebase.auth.GithubAuthProvider()
+      await firebase.auth().signInWithPopup(provider)
+      browser && window.location.assign('/movies')
+    } catch (e) {
+      alert(e?.message)
     }
   }
 </script>
