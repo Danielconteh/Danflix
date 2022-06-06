@@ -2,7 +2,7 @@
   import NProgress from 'nprogress'
   import { navigating } from '$app/stores'
   import firebase from 'firebase/app'
-  import 'firebase/auth'
+  import 'firebase/auth/'
   import { onMount } from 'svelte'
   import authStore from '../store.js'
 
@@ -10,6 +10,7 @@
   import 'nprogress/nprogress.css'
   import { goto } from '$app/navigation'
   import { page } from '$app/stores'
+  import { browser } from '$app/env'
 
   NProgress.configure({
     minimum: 0.16,
@@ -30,23 +31,24 @@
       apiKey: 'AIzaSyDTR5SBMKmDAzLcI_6SjkBAbCoSkF2zNGA',
       authDomain: 'danflix-4b096.firebaseapp.com',
       projectId: 'danflix-4b096',
-      // storageBucket: 'danflix-4b096.appspot.com',
+      storageBucket: 'danflix-4b096.appspot.com',
       messagingSenderId: '139233559084',
       appId: '1:139233559084:web:3d459a5c69409c08f8c789',
     }
 
     firebase.initializeApp(firebaseConfig)
-
-    firebase.auth().onAuthStateChanged((user) => {
-      authStore.set({
-        isLoggedIn: user !== null,
-        user,
-        firebaseControlled: true,
+    if (browser) {
+      firebase.auth().onAuthStateChanged((user) => {
+        authStore.set({
+          isLoggedIn: user !== null,
+          user,
+          firebaseControlled: true,
+        })
+        if ($page?.url?.pathname.split('/')[1] === 'movies') {
+          if (!user) return goto('/')
+        }
       })
-      if ($page?.url?.pathname.split('/')[1] === 'movies') {
-        if (!user) return goto('/')
-      }
-    })
+    }
   })
 </script>
 

@@ -6,6 +6,7 @@
 
   async function loginWithGoogle() {
     try {
+      console.log('first')
       const provider = new firebase.auth.GoogleAuthProvider()
       await firebase.auth().signInWithPopup(provider)
       browser && window.location.assign('/movies')
