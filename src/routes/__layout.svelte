@@ -28,26 +28,35 @@
 
   onMount(async () => {
     const firebaseConfig = {
-      apiKey: 'AIzaSyDTR5SBMKmDAzLcI_6SjkBAbCoSkF2zNGA',
-      authDomain: 'danflix-4b096.firebaseapp.com',
-      projectId: 'danflix-4b096',
-      storageBucket: 'danflix-4b096.appspot.com',
-      messagingSenderId: '139233559084',
-      appId: '1:139233559084:web:3d459a5c69409c08f8c789',
+      apiKey: import.meta.env.VITE_API_KEY_FIREBASE,
+      authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+      projectId: import.meta.env.VITE_PROJECT_ID,
+      storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+      messagingSenderId: import.meta.env.VITE_MESSAGE_ID,
+      appId: import.meta.env.VITE_APP_ID,
+
+      //      apiKey: import.meta.env.VITE_API_KEY_FIREBASE,
+      // authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+      // projectId: import.meta.env.VITE_PROJECT_ID,
+      // storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+      // messagingSenderId: import.meta.env.VITE_MESSAGE_ID,
+      // appId: '1:139233559084:web:3d459a5c69409c08f8c789',
     }
 
-    firebase.initializeApp(firebaseConfig)
+    if (firebase) {
+      firebase.initializeApp(firebaseConfig)
 
-    firebase.auth().onAuthStateChanged((user) => {
-      authStore.set({
-        isLoggedIn: user !== null,
-        user,
-        firebaseControlled: true,
+      firebase.auth().onAuthStateChanged((user) => {
+        authStore.set({
+          isLoggedIn: user !== null,
+          user,
+          firebaseControlled: true,
+        })
+        if ($page?.url?.pathname.split('/')[1] === 'movies') {
+          if (!user) return goto('/')
+        }
       })
-      if ($page?.url?.pathname.split('/')[1] === 'movies') {
-        if (!user) return goto('/')
-      }
-    })
+    }
   })
 </script>
 
