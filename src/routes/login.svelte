@@ -1,27 +1,29 @@
 <script>
   import { browser } from '$app/env'
-
-  import firebase from 'firebase/app'
   import Icon from '@iconify/svelte'
 
   async function loginWithGoogle() {
-    try {
-      console.log('first')
-      const provider = new firebase.auth.GoogleAuthProvider()
-      await firebase.auth().signInWithPopup(provider)
-      browser && window.location.assign('/movies')
-    } catch (e) {
-      alert(e?.message)
+    if (firebase) {
+      try {
+        console.log('first')
+        const provider = new firebase.auth.GoogleAuthProvider()
+        await firebase.auth().signInWithPopup(provider)
+        browser && window.location.assign('/movies')
+      } catch (e) {
+        alert(e?.message)
+      }
     }
   }
 
   async function loginWithGithub() {
-    try {
-      let provider = new firebase.auth.GithubAuthProvider()
-      await firebase.auth().signInWithPopup(provider)
-      browser && window.location.assign('/movies')
-    } catch (e) {
-      alert(e?.message)
+    if (firebase) {
+      try {
+        let provider = new firebase.auth.GithubAuthProvider()
+        await firebase.auth().signInWithPopup(provider)
+        browser && window.location.assign('/movies')
+      } catch (e) {
+        alert(e?.message)
+      }
     }
   }
 </script>

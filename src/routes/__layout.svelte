@@ -1,8 +1,8 @@
 <script>
   import NProgress from 'nprogress'
   import { navigating } from '$app/stores'
-  import firebase from 'firebase/app'
-  import 'firebase/auth/'
+  // import firebase from 'firebase'
+  // import 'firebase/auth'
   import { onMount } from 'svelte'
   import authStore from '../store.js'
 
@@ -26,7 +26,7 @@
     }
   }
 
-  onMount(() => {
+  onMount(async () => {
     const firebaseConfig = {
       apiKey: 'AIzaSyDTR5SBMKmDAzLcI_6SjkBAbCoSkF2zNGA',
       authDomain: 'danflix-4b096.firebaseapp.com',
@@ -37,18 +37,17 @@
     }
 
     firebase.initializeApp(firebaseConfig)
-    if (browser) {
-      firebase.auth().onAuthStateChanged((user) => {
-        authStore.set({
-          isLoggedIn: user !== null,
-          user,
-          firebaseControlled: true,
-        })
-        if ($page?.url?.pathname.split('/')[1] === 'movies') {
-          if (!user) return goto('/')
-        }
+
+    firebase.auth().onAuthStateChanged((user) => {
+      authStore.set({
+        isLoggedIn: user !== null,
+        user,
+        firebaseControlled: true,
       })
-    }
+      if ($page?.url?.pathname.split('/')[1] === 'movies') {
+        if (!user) return goto('/')
+      }
+    })
   })
 </script>
 

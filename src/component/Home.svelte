@@ -10,23 +10,14 @@
   import authStore from '../store'
 
   import { goto } from '$app/navigation'
-  import firebase from 'firebase/app'
-
-  async function loginWithGoogle() {
-    try {
-      const provider = new firebase.auth.GoogleAuthProvider()
-      await firebase.auth().signInWithPopup(provider)
-      return goto('/movies')
-    } catch (e) {
-      console.log(e)
-    }
-  }
 
   async function logout() {
-    try {
-      await firebase.auth().signOut()
-    } catch (e) {
-      alert(e?.message)
+    if (firebase) {
+      try {
+        await firebase.auth().signOut()
+      } catch (e) {
+        alert(e?.message)
+      }
     }
   }
 </script>
