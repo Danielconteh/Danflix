@@ -1,7 +1,7 @@
 <script>
   import { browser } from '$app/env'
 
-  import firebase from 'firebase'
+  import firebase from 'firebase/app'
   import Icon from '@iconify/svelte'
 
   async function loginWithGoogle() {
