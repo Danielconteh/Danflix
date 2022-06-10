@@ -1,8 +1,7 @@
 <script>
   import NProgress from 'nprogress'
   import { navigating } from '$app/stores'
-  // import firebase from 'firebase'
-  // import 'firebase/auth'
+
   import { onMount } from 'svelte'
   import authStore from '../store.js'
 
@@ -10,7 +9,6 @@
   import 'nprogress/nprogress.css'
   import { goto } from '$app/navigation'
   import { page } from '$app/stores'
-  import { browser } from '$app/env'
 
   NProgress.configure({
     minimum: 0.16,
