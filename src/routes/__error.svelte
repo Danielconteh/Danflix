@@ -16,6 +16,10 @@
   export let status
 </script>
 
+<svelte:head>
+  <title>Error</title>
+</svelte:head>
+
 <div>something went wrong!</div>
 {#if status == 404}
   <!-- Used '==' instead of '===' to match string/number status code (just to be sure) -->

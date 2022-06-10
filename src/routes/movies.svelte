@@ -6,6 +6,10 @@
   const queryClient = new QueryClient()
 </script>
 
+<svelte:head>
+  <title>Movies</title>
+</svelte:head>
+
 <QueryClientProvider client={queryClient}>
   <Movies />
 </QueryClientProvider>

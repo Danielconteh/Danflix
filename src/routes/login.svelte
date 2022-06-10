@@ -24,6 +24,10 @@
   }
 </script>
 
+<svelte:head>
+  <title>Login</title>
+</svelte:head>
+
 <div class="contaner">
   <div class="container_log">
     <span on:click={loginWithGoogle} class="log_wrapper google">
