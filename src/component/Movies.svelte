@@ -7,7 +7,9 @@
   import Home from './movies/Home.svelte'
   import Icon from '@iconify/svelte'
 
-  const key = import.meta.env.VITE_API_KEY
+  const key = '87ca371337261d47bdbee580bbd64302'
+  import.meta.env.VITE_API_KEY
+  // '87ca371337261d47bdbee580bbd64302'
   const base = 'https://api.themoviedb.org/3'
   const urls = [
     `${base}/movie/popular?api_key=${key}&language=en-US&page=1`,
