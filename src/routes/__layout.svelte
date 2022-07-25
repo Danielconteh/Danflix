@@ -11,7 +11,7 @@
   import { page } from '$app/stores'
 
   NProgress.configure({
-    minimum: 0.16,
+    minimum: 0.5,
     showSpinner: false,
   })
 
