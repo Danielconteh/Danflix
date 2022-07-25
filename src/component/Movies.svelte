@@ -29,10 +29,14 @@
     }),
     {
       retry: 7,
-      cacheTime: 60 * 60 * 24,
+      // cacheTime: 60 * 60 * 24,
+      cacheTime: new Date().getDate() + 30,
+
       refetchOnWindowFocus: true,
     }
   )
+  //   var now = new Date();
+  // now.setDate(now.getDate() + 30);
 
   // export
   let base_data =
@@ -58,57 +62,57 @@
   <title>Home</title>
 </svelte:head>
 
-{#if $authStore?.isLoggedIn}
-  <Banner {base_data} />
-  <Home
-    title="netflixOriginal"
-    netflixOriginal={$userQueries[0]?.data?.data?.results}
-    {banner_img_backdrop}
-    isLargeRow
-  />
-  <Home
-    title="trending now"
-    netflixOriginal={$userQueries[1]?.data?.data?.results}
-    {banner_img_backdrop}
-  />
-  <Home
-    title="top rated"
-    netflixOriginal={$userQueries[2]?.data?.data?.results}
-    {banner_img_backdrop}
-  />
-  <Home
-    title="action movies"
-    netflixOriginal={$userQueries[3]?.data?.data?.results}
-    {banner_img_backdrop}
-  />
-  <Home
-    title="commedy movies"
-    netflixOriginal={$userQueries[4]?.data?.data?.results}
-    {banner_img_backdrop}
-  />
-  <Home
-    title="horror movies"
-    netflixOriginal={$userQueries[5]?.data?.data?.results}
-    {banner_img_backdrop}
-  />
-  <Home
-    title="romance movies"
-    netflixOriginal={$userQueries[6]?.data?.data?.results}
-    {banner_img_backdrop}
-  />
-  <Home
-    title="documentaries movies"
-    netflixOriginal={$userQueries[7]?.data?.data?.results}
-    {banner_img_backdrop}
-  />
-{:else}
-  <div class="spiiner_container">
+<!-- {#if $authStore?.isLoggedIn} -->
+<Banner {base_data} />
+<Home
+  title="netflixOriginal"
+  netflixOriginal={$userQueries[0]?.data?.data?.results}
+  {banner_img_backdrop}
+  isLargeRow
+/>
+<Home
+  title="trending now"
+  netflixOriginal={$userQueries[1]?.data?.data?.results}
+  {banner_img_backdrop}
+/>
+<Home
+  title="top rated"
+  netflixOriginal={$userQueries[2]?.data?.data?.results}
+  {banner_img_backdrop}
+/>
+<Home
+  title="action movies"
+  netflixOriginal={$userQueries[3]?.data?.data?.results}
+  {banner_img_backdrop}
+/>
+<Home
+  title="commedy movies"
+  netflixOriginal={$userQueries[4]?.data?.data?.results}
+  {banner_img_backdrop}
+/>
+<Home
+  title="horror movies"
+  netflixOriginal={$userQueries[5]?.data?.data?.results}
+  {banner_img_backdrop}
+/>
+<Home
+  title="romance movies"
+  netflixOriginal={$userQueries[6]?.data?.data?.results}
+  {banner_img_backdrop}
+/>
+<Home
+  title="documentaries movies"
+  netflixOriginal={$userQueries[7]?.data?.data?.results}
+  {banner_img_backdrop}
+/>
+<!-- {:else} -->
+<!-- <div class="spiiner_container">
     <div class="spiner">
       <Icon icon="ei:spinner" width="70" height="70" />
     </div>
-  </div>
-{/if}
+  </div> -->
 
+<!-- {/if} -->
 <style>
   .spiiner_container {
     overflow: hidden !important;

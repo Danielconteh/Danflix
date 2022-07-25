@@ -32,7 +32,7 @@ url("https://image.tmdb.org/t/p/original/${
       data?.backdrop_path ||
       base_data?.poster_path ||
       data?.poster_path ||
-      '/fOy2Jurz9k6RnJnMUMRDAgBwru2.jpg'}');
+      '/p1F51Lvj3sMopG948F5HsBbl43C.jpg'}');
     background-size:cover;
     background-position:center;
      background-repeat: no-repeat;
@@ -48,7 +48,7 @@ url("https://image.tmdb.org/t/p/original/${
           : base_data?.title ||
             base_data?.name ||
             base_data?.original_name ||
-            ''}
+            'Thor: Love and Thunder'}
       </h1>
 
       <div in:fade class="banner__buttons">
@@ -59,7 +59,8 @@ url("https://image.tmdb.org/t/p/original/${
           {truncate(
             data ? browser && data?.overview : base_data?.overview,
             150
-          ) || ''}
+          ) ||
+            'After his retirement is interrupted by Gorr the God Butcher, a galactic killer who seeks the extinction of the gods, Thor enlists the help of King Va...'}
         </h1>
       </div>
     </div>

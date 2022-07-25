@@ -36,8 +36,7 @@
         ></svg
       >
 
-      {#if !$authStore?.isLoggedIn}
-        <!-- <a href="/login">sign in</a> -->
+      <!-- {#if !$authStore?.isLoggedIn}
         <span
           on:click={() => {
             console.log('login')
@@ -46,7 +45,7 @@
         >
       {:else}
         <span on:click={logout}>logout</span>
-      {/if}
+      {/if} -->
     </div>
 
     <div class="story_card">
@@ -55,15 +54,14 @@
         <h2>Watch anywhere. Cancel anytime.</h2>
         <p>enjoy the best hollywood, nollywood, bollywood and much more.</p>
       </div>
+      <!-- on:click={!$authStore?.isLoggedIn ? goto('/login') : goto('/movies')} -->
 
-      <span
-        on:click={!$authStore?.isLoggedIn ? goto('/login') : goto('/movies')}
-      >
-        {#if !$authStore?.isLoggedIn}
-          <span> sign in to continue</span>
-        {:else}
-          <span>continue watch</span>
-        {/if}
+      <span on:click={() => goto('/movies')}>
+        <!-- {#if !$authStore?.isLoggedIn} -->
+        <!-- <span> sign in to continue</span> -->
+        <!-- {:else} -->
+        <span>continue watch</span>
+        <!-- {/if} -->
       </span>
     </div>
   </div>
